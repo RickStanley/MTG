@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500');
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body,
+html {
+  // height: 100%;
+  width: 100%;
+  font-family: 'Fira Sans', Helvetica, 'Arial Narrow', 'Book Antiqua', sans-serif;
+  text-align: center;
+}
+
+pre {
+  text-align: left;
+  font-family: monospace, monospace;
+}
+
+div.wrapper {
+  padding: 15px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 100%;
+  @media only screen and (min-width: 1024px) {
+    grid-template-columns: 1fr 50%;
+    grid-gap: 2%;
+  }
+}
+
+div.behalter {
+  text-align: left;
+  h1.Haupttitel {
+    font-weight: 500;
+    color: black;
+  }
+  div.lager {
+    margin: 1rem 0;
+    h3 {
+      font-weight: 400;
+      color: dodgerblue;
+    }
+    label {
+      display: block;
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.8;
+      color: #0a0a0a;
+    }
+    a {
+      color: #e040fb;
+      margin-top: -.5rem;
+      font-size: .85rem;
+      font-style: italic;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      &.help-text {
+        color: #959fa8;
+        pointer-events: none;
+        cursor: text;
+      }
+    }
+    input,
+    textarea {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      height: 2.4375rem;
+      margin: 0;
+      padding: .5rem;
+      border: 1px solid #959fa8;
+      border-radius: 3px;
+      background-color: #fefefe;
+      box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.05);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #0a0a0a;
+      transition: box-shadow .5s, border-color .25s ease-in-out;
+      appearance: none;
+      &:focus {
+        outline: none;
+        border: 1px solid #141516;
+        background-color: #fefefe;
+        box-shadow: 0 0 5px #ededed;
+        transition: box-shadow .5s, border-color .25s ease-in-out;
+      }
+    }
+  }
+}
+
+div.ausgabebehalter {
+  grid-row: 2;
+  @media only screen and (min-width: 1024px) {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  position: sticky;
+  top: 50px;
+  align-self: start;
+  pre.ausgabe {
+    color: #c66;
+    font-size: 0.85rem;
+    padding: .8rem 1rem;
+    background-color: #1d1f21;
+    white-space: nowrap;
+    overflow-x: auto;
+    span {
+      &.kommentar {
+        color: #969896;
+        font-style: italic;
+      }
+      &.meta-content {
+        color: #b5bd68;
+      }
+      &.default {
+        color: white;
+      }
+      &.wrapper {
+        transition: opacity .2s ease;
+        opacity: 0;
+        display: block;
+      }
+    }
+  }
+  img, div.infobehalter {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  img {
+    width: 100%;
+  }
+  div.infobehalter {
+    width: 4%;
+    margin-top: 5px;
+    position: relative;
+    &::after {
+      content: 'Como usar: \A$ ./concat-seo.sh arquivo.{php,html,*}';
+      position: absolute;
+      font-size: 12px;
+      left: -195px;
+      border-radius: 2px;
+      background-color: #098de6;
+      color: white;
+      text-align: left;
+      top: -40px;
+      pointer-events: none;
+      white-space: pre;
+      opacity: 0;
+      padding: 5px;
+      overflow: hidden;
+      transition: top .3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity .3s ease;
+    }
+    &::before {
+      content: '';
+      opacity: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      height: 0;
+      border: 0 solid transparent;
+      border-left-width: 5px;
+      border-right-width: 5px;
+      border-top: 8px solid #098de6;
+      left: 5px;
+      top: -2px;
+      opacity: 0;
+      transition: top .3s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity .3s ease;
+    }
+    &:hover,
+    &:focus {
+      &::after {
+        opacity: 1;
+        top: -48px;
+      }
+      &::before {
+        top: -10px;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+button {
+  width: 100%;
+  position: relative;
+  &.copy {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    max-width: 100px;
+    padding: 10px 0;
+    color: white;
+    background-color: rgb(9, 141, 230);
+    transition: background-color .2s ease;
+    outline: none;
+    &:hover,
+    &:focus {
+      background-color: rgb(0, 115, 192);
+    }
+    &::after {
+      content: 'Copiado';
+      position: absolute;
+      display: block;
+      background-color: #098de6;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      padding: 5px 0px;
+      top: 8px;
+      transition: top .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      width: 80%;
+      z-index: -1;
+      pointer-events: none;
+      box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    }
+    &::before {
+      content: '';
+      top: 10px;
+      transition: top .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: block;
+      position: absolute;
+      width: 0;
+      right: 0;
+      left: 0;
+      margin: 0 auto;
+      height: 0;
+      border: 0 solid transparent;
+      border-right-width: 5px;
+      border-left-width: 5px;
+      border-bottom: 8px solid #098de6;
+      z-index: -1;
+      pointer-events: none;
+    }
+    &.kopiert {
+      &::after {
+        top: 44px;
+      }
+      &::before {
+        top: 36px;
+      }
+    }
+    &.export {
+      &::after {
+        content: 'Exportado';
+      }
+    }
+  }
+}
